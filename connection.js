@@ -1,4 +1,4 @@
-const { connect } = require('http2');
+const { connect } = require('http');
 const mongoose=require('mongoose');
 
 async function connection() {
