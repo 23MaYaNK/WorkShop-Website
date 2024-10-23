@@ -1,0 +1,22 @@
+<%- include('./base/header.ejs') %>
+<div id="content">
+
+    <div class="login-container">
+        <div class="login-header">
+            <h2>Login</h2>
+        </div>
+        
+        <form action="/do/login" method="post">
+            <input type="number" placeholder="Enter Mobile Number" name="mobileNo" required>
+            <input type="password" placeholder="Password" name="password" required>
+            <button type="submit" class="button-login">Login</button>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+        </form>
+        
+        <div class="signup-link">
+            <p>Don’t have an account? <a href="/connect/with/us">Sign up here</a></p>
+        </div>
+    </div>
+</div>
+
+    <%- include('./base/footer.ejs') %>

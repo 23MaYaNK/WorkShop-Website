@@ -1,0 +1,96 @@
+<!-- Footer -->
+<footer>
+    <section id="contact">
+      <p>&copy; All rights Reserved by Laxmi Automobiles PVT. LMT.</p>
+      <p>Email: k.c.pal1976@gmail.com | Phone: 91+ 9811306157</p>
+    </section>
+  </footer>
+
+  <script>
+   // Select all sidebar links
+const navLinks = document.querySelectorAll('.sidebar ul li a');
+    const modeBtn = document.getElementById('mode-btn');
+    const body = document.body;
+    
+   
+const sidebar = document.getElementById('sidebar');
+
+
+// Function to adjust content margin based on sidebar visibility
+const adjustContentMargin = () => {
+   
+        content.style.marginLeft = '270px'; // Adjust this value as needed
+    
+};
+
+navLinks.forEach(link => {
+  link.addEventListener('click', function() {
+    // Remove 'active' from all links
+    navLinks.forEach(link => link.classList.remove('active'));
+    
+    // Add 'active' class to the clicked link
+    this.classList.add('active');
+  });
+});
+
+const content = document.getElementById('content'); // Ensure this matches your actual content element's ID
+sidebar.classList.toggle('active');
+    adjustContentMargin(); // Adjust content margin when toggling
+    if (sidebar.classList.contains('active')) {
+        content.style.marginLeft = '200px'; // Adjust this value as needed
+    } else {
+        content.style.marginLeft = '0'; // Reset the margin
+    }
+    // Toggle dark/light mode
+    modeBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      
+      if (body.classList.contains('dark-mode')) {
+        modeBtn.innerHTML = '☀️ ';
+      } else {
+        modeBtn.innerHTML = '🌙 ';
+      }
+    });
+
+    
+// Get the mode button and the body element
+
+
+// Function to apply the dark mode based on localStorage
+const applyDarkMode = () => {
+    const darkMode = localStorage.getItem('darkMode');
+    if (darkMode === 'enabled') {
+        body.classList.add('dark-mode');
+        modeBtn.innerHTML = '☀️'; // Sun icon for light mode toggle
+    } else {
+        body.classList.remove('dark-mode');
+        modeBtn.innerHTML = '🌙'; // Moon icon for dark mode toggle
+    }
+};
+
+// Apply dark mode on page load
+applyDarkMode();
+
+// Toggle dark/light mode when the button is clicked
+modeBtn.addEventListener('click', () => {
+    const darkMode = localStorage.getItem('darkMode');
+    
+    if (darkMode !== 'enabled') {
+        // Enable dark mode
+        body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'enabled');
+        modeBtn.innerHTML = '☀️';
+    } else {
+        // Disable dark mode
+        body.classList.remove('dark-mode');
+        localStorage.setItem('darkMode', 'disabled');
+        modeBtn.innerHTML = '🌙';
+    }
+});
+
+
+  </script>
+  
+
+</body>
+</html>

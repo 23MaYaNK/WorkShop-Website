@@ -1,0 +1,18 @@
+<%- include('./base/header.ejs') %>
+<div class="login-container">
+        <div class="login-header">
+            <h2>Enquiry</h2>
+        </div>
+        
+        <form action="/do/enquiry" method="post">
+            <input type="text" placeholder="Enter the your Name" name="customerName" required>
+            <input type="number" placeholder="Enter Mobile Number" name="mobileNo" required>
+            <input type="number" placeholder="Enter Whatsapp Number" name="whatappNo" required>
+            <button type="submit" class="button-login">Send</button>
+            
+        </form>
+        
+       
+    </div>
+</div>
+<%- include('./base/footer.ejs') %>

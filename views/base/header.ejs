@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automobile Shop</title>
+  
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+    body {
+     
+      background-color: #fff;
+      color: #333;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header img {
+      background-color: #ff0000;
+      padding: 10px;
+      display: flex;
+      justify-content:start;
+    }
+    .logo{
+      border-radius: 50%;
+      height: 10%;
+      width: 10%;
+    
+    }
+    .header{
+      background-color: #ff0000;
+      padding: 10px;
+      display: flex;
+      justify-content:end;
+    }
+
+  
+ 
+
+    /* Link Styling */
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  display: block;
+  padding: 10px;
+  position: relative; /* To position the pseudo-element */
+  transition: color 0.3s ease; /* Smooth color change */
+}
+
+/* Add this for hover effect to spread the line from center */
+.sidebar ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Place it at the bottom of the link */
+  left: 50%; /* Start from the center */
+  width: 0; /* Start with 0 width */
+  height: 2px; /* Height of the underline */
+  background-color: white; /* White underline */
+  transition: width 0.3s ease, left 0.3s ease; /* Animate width and position */
+}
+
+/* On hover or when active, animate the line */
+.sidebar ul li a:hover::after,
+.sidebar ul li a.active::after {
+  width: 100%; /* Expand to full width */
+  left: 0; /* Move starting point to the left */
+}
+
+    .container {
+      display: flex;
+      flex-grow: 1;
+      flex-wrap: wrap;
+    }
+
+    /* Sidebar styling */
+    .sidebar {
+      width: 160px;
+      background-color: #ff0000;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 20px;
+      margin-top: 60px; /* Adjust to place below header */
+    }
+
+    .sidebar ul li {
+      margin: 20px 0;
+      list-style-type: none;
+    }
+
+   
+
+    .sidebar ul li a.active {
+  border-bottom: 2px solid white;
+}
+
+    .sidebar ul li a:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      /* border: 2px solid white; */
+      border-radius: 5%;
+    }
+
+    /* Add this for hover effect to spread the line from center */
+
+
+/* On hover or when active, animate the line */
+.sidebar ul li a:hover::after,
+.sidebar ul li a.active::after {
+  width: 100%; /* Expand to full width */
+  left: 0; /* Move starting point to the left */
+}
+
+    .content {
+      margin-left: 270px;
+      padding: 25px;
+      flex-grow: 1;
+    }
+
+    h3 {
+      color: #ff0000;
+      text-shadow: 0 0 5px rgba(255, 0, 0, 0.7), 0 0 10px rgba(255, 0, 0, 0.5); /* Glowing effect */
+      animation: glow 1.5s infinite alternate; /* Apply glow animation */
+    }
+    h1{
+      color: #ff0000;
+      text-shadow: 0 0 5px rgba(255, 0, 0, 0.7), 0 0 10px rgba(255, 0, 0, 0.5); /* Glowing effect */
+      animation: glow 1.5s infinite alternate; /* Apply glow animation */
+    }
+
+    section {
+      margin: 40px 0;
+    }
+
+    section h2 {
+      color: #ff0000;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+
+    /* service cards styling */
+    .service-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .service-card {
+            position: relative;
+            display: tra;
+            width: 250px;
+            height: 280px;
+            background:none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            margin: 2%;
+            border-radius: 8px;            border: 2px solid #B22222;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+        }
+
+        .service-image {
+          align-items: center;
+            width: 40%;
+            height: 40%;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1%;
+        }
+
+        .service-content {
+            padding: 5px;
+            text-align: center;
+        }
+
+        .service-title {
+            font-size: 1.0em;
+            color: #B22222; /* Red */
+            /* margin-bottom: 0.5px; */
+        }
+
+        .service-text {
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 0.8em;
+        }
+
+        .enquire-btn {
+            padding: 5px 10px;
+            background-color: #B22222;
+            color: #FFF;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .enquire-btn:hover {
+            background-color: #FF4C4C;
+            box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.6); /* Glowing effect */
+        }
+
+       
+        /* Hover Effect */
+        .service-card:hover .hover-shutter {
+            top: 0;
+        }
+
+        .hover-shutter {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(168, 60, 60, 0.8);
+            transition: top 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: rgb(13, 12, 12);
+            text-align: center;
+        }
+
+        .hover-shutter p {
+            font-size: 0.8em;
+            margin-bottom: 10px;
+            font-family:'Times New Roman', Times, serif;
+            text-decoration: solid;
+              }
+           /* Blur the card content on hover */
+           .service-card:hover .service-image,
+        .service-card:hover .service-content {
+            filter: blur(5px);
+        }
+
+    /* Footer styling */
+    footer {
+      background-color: #ff0000;
+      color: white;
+      text-align: center;
+      /* position: fixed; */
+      /* bottom: 0; */
+      width: 100%;
+      margin-top:10%;
+  
+    }
+
+    footer p {
+      margin: 5px 0;
+      font-size: 18px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 200px;
+      }
+
+      .content {
+        margin-left: 220px;
+      }
+
+      .toggle-btn {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+
+      .sidebar ul li a {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        transform: none;
+      }
+
+      .sidebar.active {
+        transform: none;
+      }
+
+      .toggle-btn {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 10px;
+      }
+
+      header {
+        justify-content: space-between;
+      }
+
+      section {
+        margin: 20px 0;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .toggle-btn {
+        font-size: 14px;
+        padding: 6px 12px;
+      }
+
+      .sidebar ul li a {
+        font-size: 14px;
+      }
+    } 
+    @keyframes glow {
+        0% {
+            text-shadow: 0 0 15px rgb(232, 143, 143), 0 0 20px rgb(236, 81, 81);
+        }
+        50% {
+        text-shadow: 0 0 15px rgba(255, 0, 0, 1), 0 0 20px rgb(192, 10, 10);
+    }
+    100% {
+        text-shadow: 0 0 5px rgba(255, 0, 0, 0.7), 0 0 10px rgb(246, 241, 241);
+    }
+    
+}
+/* here all the above is for home */
+
+.login-container {
+    background: rgba(0, 0, 0, 0.7); /* Slight transparent black background */
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px; /* Responsive width */
+    margin: 25px;
+    font-family: Arial, sans-serif;
+   
+  
+}
+
+.login-header {
+text-align: center;
+margin-bottom: 2.5rem;
+}
+
+.login-header h2 {
+font-size: 2rem;
+color: white;/* Deep blue color for header */
+}
+
+input[type="number"],
+input[type="password"],
+input[type="text"],
+input[type="email"] {
+width: 100%;
+padding: 1rem;
+margin-bottom: 1.5rem;
+border: 1px solid #e10e0e;
+border-radius: 8px;
+font-size: 1rem;
+color: #df0a0a;
+background-color: #f5f6fb;
+transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+border-color: #d7dce8;
+box-shadow: 0 0 10px rgb(197, 10, 10); /* Subtle glow on focus */
+outline: none;
+}
+
+.button-login {
+width: 100%;
+padding: 1rem;
+background-color: #d94c4c; /* Bright primary color */
+color: white;
+font-size: 1.2rem;
+font-weight: 600;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+transition: background-color 0.3s ease, box-shadow 0.3s ease;
+position: relative;
+overflow: hidden;
+}
+
+.button-login:hover {
+background-color: #f42222;
+box-shadow: 0 0 20px rgba(79, 117, 219, 0.7); /* Glowing effect */
+}
+
+.button-login:after {
+content: '';
+position: absolute;
+top: -100%;
+left: -100%;
+width: 300%;
+height: 300%;
+background: radial-gradient(circle, rgba(123, 6, 4, 0.5), transparent 70%);
+opacity: 0;
+transition: opacity 0.4s, transform 0.4s;
+}
+
+.button-login:hover:after {
+opacity: 1;
+transform: translate(50%, 50%);
+}
+
+.forgot-password {
+display: block;
+text-align: right;
+margin-top: 1rem;
+color:white;
+text-decoration: none;
+font-size: 0.9rem;
+}
+
+.forgot-password:hover {
+text-decoration: underline;
+}
+
+.signup-link {
+text-align: center;
+margin-top: 1.5rem;
+font-size: 0.9rem;
+color: #f5f6fb;
+}
+
+.signup-link a {
+color: rgb(186, 151, 151);
+text-decoration: none;
+font-weight: 500;
+}
+
+.signup-link a:hover {
+text-decoration: underline;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+.login-container {
+padding: 1.5rem;
+max-width: 90%;
+}
+}
+ /* here the style start for the about us */
+ /* Add to your existing CSS */
+
+/* About Card Styling */
+.about-card {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 2px solid #ff0000;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 40px 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.owner-image {
+    border-radius: 50%;
+    width: 20%;
+    height: 25%;
+    
+    object-fit: cover;
+    margin-right: 20px;
+    border: 3px solid #ff0000;
+}
+.toggle-btn, .mode-btn, .logout-btn {
+      background-color: #fff;
+      color: #f01919;
+      border: 2px solid #f8f8f8;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 10px;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .toggle-btn:hover, .mode-btn:hover, .logout-btn:hover {
+      background-color: #dc1313;
+      color: #f0ebeb;
+    }
+.about-content {
+    flex-grow: 1;
+}
+
+.about-content h3 {
+    color: #ff0000;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.about-content p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.about-content .contact-btn {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.about-content .contact-btn:hover {
+    background-color: #d40000;
+    transition: background-color 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .owner-image {
+        margin-bottom: 15px;
+    }
+}
+/* here the style is for the contact use */
+/* Contact Page Styling */
+#contact-section {
+    margin: 40px 0;
+    max-width: 90%;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* border: 2px solid red; */
+    background-color: grey;
+    padding: 20px;
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
+}
+
+h2, h3 {
+    color:rgb(243, 13, 13);
+    padding: 20px;
+}
+
+.contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 40px; 
+    padding: 20px;
+   
+}
+
+.contact-card {
+    background-color: #fbfbfb;
+    /* border: 2px solid #ff0000; */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 48%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.contact-card p {
+    font-size: 18px;
+    color: rgb(240, 59, 59);
+}
+
+.contact-card a {
+    text-decoration: none;
+    color: rgb(233, 24, 24);
+    font-weight: bold;
+}
+
+.contact-card a:hover {
+    color: #d40000;
+}
+
+#contact-form {
+    background-color: #fff;
+    /* border: 2px solid #ff0000; */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#contact-form div {
+    margin-bottom: 15px;
+}
+
+#contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+#contact-form input, #contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#contact-form button {
+    background-color: #de5959;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#contact-form button:hover {
+    background-color: #ec0c0c;
+    transition: background-color 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    #contact-section {
+        padding: 0 10px;
+    }
+}
+/* Dark/Light mode specific styles */
+.dark-mode {
+      background-image: url('/images/newBgDark.jpg');
+      color: rgb(243, 235, 235)
+    }
+
+    .dark-mode .header {
+      background-color: rgb(46, 58, 62);
+    }
+
+    .dark-mode .sidebar {
+      background-color: rgb(46, 58, 62);
+    }
+
+    .dark-mode .sidebar ul li a {
+      color: #fff;
+    }
+
+    .dark-mode #content{
+      background-image: url('/images/DarkBG.jpg');
+    }
+    .dark-mode .logo{
+      background-color: rgb(46, 58, 62);;
+    }
+    .dark-mode .service-card h2{
+      color: white;
+    }
+    .dark-mode .service-text{
+      color: white;
+    }
+    .dark-mode button i {
+    color: #f0eeee;
+}
+
+button:hover i {
+    color: #91eeee; /* Change color on hover */
+}
+    .dark-mode footer{
+      background-color: rgb(46, 58, 62);
+      color: white;
+    }
+    .dark-mode section #contact{
+      background-color: rgb(46, 58, 62);
+    }
+
+    .dark-mode .toggle-btn, .dark-mode .mode-btn, .dark-mode .logout-btn {
+      background-color: #f3f4e4;
+      color: #f49090;
+      border-color: #444;
+    }
+    .dark-mode .about-card{
+      color: white;
+      background-color: rgb(46, 58, 62);
+      border: 2px solid white;
+    }
+    .header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    margin: 0 10px;
+}
+
+button i {
+    color: #161313;
+}
+
+button:hover i {
+    color: #f9fafa; /* Change color on hover */
+}
+
+
+
+  </style>
+</head>
+<body id="content">
+  <div class="header">
+    <a href="/login">
+      <button class="admin-btn" id="admin-btn"><i class="fas fa-user-shield"></i></button>
+    </a>
+    <button class="mode-btn" id="mode-btn"><i class="fas fa-moon"></i></button>
+</div>
+
+
+  <header >
+    <img src='/images/bikelogoedit.jpg'  class="logo" alt="logo">
+  
+  </header>
+  
+  
+  <div class="container-toggle-button">
+    <nav class="sidebar" id="sidebar">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/show/bikes/customer">Bikes</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+        <li><a href="/aboutus">About Us</a></li>
+      </ul>
+    </nav>

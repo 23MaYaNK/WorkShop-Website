@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers List</title>
+</head>
+<!-- Font Awesome CDN for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+    body {
+     
+      background-color: #fff;
+      color: #333;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header img {
+      background-color: #ff0000;
+      padding: 10px;
+      display: flex;
+      justify-content:start;
+    }
+    .logo{
+      border-radius: 50%;
+      height: 10%;
+      width: 10%;
+    
+    }
+    .header{
+      background-color: #ff0000;
+      padding: 10px;
+      display: flex;
+      justify-content:end;
+    }
+
+  
+ 
+
+    /* Link Styling */
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  display: block;
+  padding: 10px;
+  position: relative; /* To position the pseudo-element */
+  transition: color 0.3s ease; /* Smooth color change */
+}
+
+/* Add this for hover effect to spread the line from center */
+.sidebar ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Place it at the bottom of the link */
+  left: 50%; /* Start from the center */
+  width: 0; /* Start with 0 width */
+  height: 2px; /* Height of the underline */
+  background-color: white; /* White underline */
+  transition: width 0.3s ease, left 0.3s ease; /* Animate width and position */
+}
+
+/* On hover or when active, animate the line */
+.sidebar ul li a:hover::after,
+.sidebar ul li a.active::after {
+  width: 100%; /* Expand to full width */
+  left: 0; /* Move starting point to the left */
+}
+
+    .container {
+      display: flex;
+      flex-grow: 1;
+      flex-wrap: wrap;
+    }
+
+    /* Sidebar styling */
+    .sidebar {
+      width: 160px;
+      background-color: #ff0000;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 20px;
+      margin-top: 60px; /* Adjust to place below header */
+    }
+
+    .sidebar ul li {
+      margin: 20px 0;
+      list-style-type: none;
+    }
+
+   
+
+    .sidebar ul li a.active {
+  border-bottom: 2px solid white;
+}
+
+    .sidebar ul li a:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      /* border: 2px solid white; */
+      border-radius: 5%;
+    }
+
+    /* Add this for hover effect to spread the line from center */
+
+
+/* On hover or when active, animate the line */
+.sidebar ul li a:hover::after,
+.sidebar ul li a.active::after {
+  width: 100%; /* Expand to full width */
+  left: 0; /* Move starting point to the left */
+}
+
+    .content {
+      margin-left: 270px;
+      padding: 25px;
+      flex-grow: 1;
+    }
+
+    h3 {
+      color: #ff0000;
+      text-shadow: 0 0 5px rgba(255, 0, 0, 0.7), 0 0 10px rgba(255, 0, 0, 0.5); /* Glowing effect */
+      animation: glow 1.5s infinite alternate; /* Apply glow animation */
+    }
+    h1{
+      color: #ff0000;
+      text-shadow: 0 0 5px rgba(255, 0, 0, 0.7), 0 0 10px rgba(255, 0, 0, 0.5); /* Glowing effect */
+      animation: glow 1.5s infinite alternate; /* Apply glow animation */
+    }
+
+    section {
+      margin: 40px 0;
+    }
+
+    section h2 {
+      color: #ff0000;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    
+    /* Footer styling */
+    footer {
+      background-color: #ff0000;
+      color: white;
+      text-align: center;
+      justify-content: end;
+      /* position: fixed; */
+      /* bottom: 0; */
+      width: 100%;
+      margin-top:35%;
+  
+    }
+
+    footer p {
+      margin: 5px 0;
+      font-size: 18px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 200px;
+      }
+
+      .content {
+        margin-left: 220px;
+      }
+
+      .toggle-btn {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+
+      .sidebar ul li a {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        transform: none;
+      }
+
+      .sidebar.active {
+        transform: none;
+      }
+
+      .toggle-btn {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 10px;
+      }
+
+      header {
+        justify-content: space-between;
+      }
+
+      section {
+        margin: 20px 0;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .toggle-btn {
+        font-size: 14px;
+        padding: 6px 12px;
+      }
+
+      .sidebar ul li a {
+        font-size: 14px;
+      }
+    } 
+    @keyframes glow {
+        0% {
+            text-shadow: 0 0 15px rgb(232, 143, 143), 0 0 20px rgb(236, 81, 81);
+        }
+        50% {
+        text-shadow: 0 0 15px rgba(255, 0, 0, 1), 0 0 20px rgb(192, 10, 10);
+    }
+    100% {
+        text-shadow: 0 0 5px rgba(255, 0, 0, 0.7), 0 0 10px rgb(246, 241, 241);
+    }
+    
+}
+
+/* Dark/Light mode specific styles */
+.dark-mode {
+    background-image: url('/images/newBgDark.jpg');
+      color: rgb(243, 235, 235)
+    }
+
+    .dark-mode .header {
+      background-color: rgb(46, 58, 62);
+    }
+
+    .dark-mode .sidebar {
+      background-color: rgb(46, 58, 62);
+    }
+
+    .dark-mode .sidebar ul li a {
+      color: #fff;
+    }
+
+    .dark-mode #content{
+      background-image: url('/images/DarkBG.jpg');
+    }
+    .dark-mode .logo{
+      background-color: rgb(46, 58, 62);;
+    }
+    .dark-mode .service-card h2{
+      color: white;
+    }
+    .dark-mode .service-text{
+      color: white;
+    }
+    .dark-mode footer{
+      background-color: rgb(46, 58, 62);
+      color: white;
+    }
+    .dark-mode section #contact{
+      background-color: rgb(46, 58, 62);
+    }
+    .dark-mode .table tbody tr:hover {
+  background-color: #656363;
+  color: white;
+}
+
+    .dark-mode .toggle-btn, .dark-mode .mode-btn, .dark-mode .logout-btn {
+      background-color: #f3f4e4;
+      color: #f49090;
+      border-color: #444;
+    }
+    .dark-mode .about-card{
+      color: white;
+      background-color: rgb(46, 58, 62);
+      border: 2px solid white;
+    }
+/* Responsive table container */
+.container {
+  padding: 20px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Table styling */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #f4f4f4;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #ddd3d3;
+  color: rgb(16, 15, 15);
+}
+
+/* Button styles */
+.btn {
+  text-decoration: none;
+  padding: 8px 12px;
+  margin: 0 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Edit button */
+.btn-edit {
+  background-color: #ffc107;
+  color: black;
+}
+
+.btn-edit:hover {
+  background-color: #e0a800;
+  color: black;
+}
+
+/* Delete button */
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+  color: white;
+}
+
+/* Icon styling inside buttons */
+.btn i {
+  margin-right: 5px;
+}
+.dark-mode  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    margin: 0 10px;
+}
+
+.dark-mode button i {
+    color: #0c0c0c;
+}
+
+.dark-mode button:hover i {
+    color: #247ed9; /* Change color on hover */
+}
+
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    margin: 0 10px;
+}
+
+ button i {
+    color: #000000;
+}
+
+ button:hover i {
+    color: #fafcff; /* Change color on hover */
+}
+  
+  </style>
+
+<body id="content">
+  <div class="header">
+    
+    <button class="mode-btn" id="mode-btn"><i class="fas fa-moon"></i></button>
+    <a href="/login">
+      <button class="logout-btn" id="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+    </a>
+</div>
+      <header >
+        <img src='/images/bikelogoedit.jpg'  class="logo" alt="logo">
+      
+      </header>
+      
+      
+      <div class="container-toggle-button">
+        <nav class="sidebar" id="sidebar">
+            <ul>
+              <li><a href="/show/customers"> Manage Customers</a></li>
+              <li><a href="/customers/messages"> Customers's Feedback</a></li>
+              <li><a href="/show/bikes/admin">Manage Old Bikes</a></li>
+            
+            </ul>
+          </nav>
+
+    <div class="container">
+        <div class="row">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Mobile No.</th>
+                        <th>Whatsapp No.</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
+                        <th>Actions</th> <!-- Added a column for actions (Edit/Delete) -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <% customer.forEach((customer) => { %>
+                        <tr>
+                            <td><%= customer.customerName %></td>
+                            <td><%= customer.mobileNo %></td>
+                            <td><%= customer.whatsappNo %></td>
+                            <td><%= customer.created_at %></td>
+                            <td><%= customer.updated_at %></td>
+                            <td>
+                                <a href="/edit/customer/page/<%= customer._id %>" class="btn btn-edit">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a href="/delete/customer/<%= customer._id %>" class="btn btn-delete">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+    <%- include('./base/footer.ejs') %>

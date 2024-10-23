@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers List</title>
+
+<!-- Font Awesome CDN for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+    body {
+     
+      background-color: #fff;
+      color: #333;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header img {
+      background-color: #ff0000;
+      padding: 10px;
+      display: flex;
+      justify-content:start;
+    }
+    .logo{
+      border-radius: 50%;
+      height: 10%;
+      width: 10%;
+    
+    }
+    .header{
+      background-color: #ff0000;
+      padding: 10px;
+      display: flex;
+      justify-content:end;
+    }
+
+  
+ 
+
+    /* Link Styling */
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  display: block;
+  padding: 10px;
+  position: relative; /* To position the pseudo-element */
+  transition: color 0.3s ease; /* Smooth color change */
+}
+
+/* Add this for hover effect to spread the line from center */
+.sidebar ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Place it at the bottom of the link */
+  left: 50%; /* Start from the center */
+  width: 0; /* Start with 0 width */
+  height: 2px; /* Height of the underline */
+  background-color: white; /* White underline */
+  transition: width 0.3s ease, left 0.3s ease; /* Animate width and position */
+}
+
+/* On hover or when active, animate the line */
+.sidebar ul li a:hover::after,
+.sidebar ul li a.active::after {
+  width: 100%; /* Expand to full width */
+  left: 0; /* Move starting point to the left */
+}
+
+    .container {
+      display: flex;
+      flex-grow: 1;
+      flex-wrap: wrap;
+    }
+
+    /* Sidebar styling */
+    .sidebar {
+      width: 160px;
+      background-color: #ff0000;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 20px;
+      margin-top: 60px; /* Adjust to place below header */
+    }
+
+    .sidebar ul li {
+      margin: 20px 0;
+      list-style-type: none;
+    }
+
+   
+
+    .sidebar ul li a.active {
+  border-bottom: 2px solid white;
+}
+
+    .sidebar ul li a:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      /* border: 2px solid white; */
+      border-radius: 5%;
+    }
+
+    /* Add this for hover effect to spread the line from center */
+
+
+/* On hover or when active, animate the line */
+.sidebar ul li a:hover::after,
+.sidebar ul li a.active::after {
+  width: 100%; /* Expand to full width */
+  left: 0; /* Move starting point to the left */
+}
+
+    .content {
+      margin-left: 270px;
+      padding: 25px;
+      flex-grow: 1;
+    }
+
+    h3 {
+      color: #ff0000;
+      text-shadow: 0 0 5px rgba(255, 0, 0, 0.7), 0 0 10px rgba(255, 0, 0, 0.5); /* Glowing effect */
+      animation: glow 1.5s infinite alternate; /* Apply glow animation */
+    }
+    h1{
+      color: #ff0000;
+      text-shadow: 0 0 5px rgba(255, 0, 0, 0.7), 0 0 10px rgba(255, 0, 0, 0.5); /* Glowing effect */
+      animation: glow 1.5s infinite alternate; /* Apply glow animation */
+    }
+
+    section {
+      margin: 40px 0;
+    }
+
+    section h2 {
+      color: #ff0000;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    
+    /* Footer styling */
+    footer {
+      background-color: #ff0000;
+      color: white;
+      text-align: center;
+      justify-content: end;
+      /* position: fixed; */
+      /* bottom: 0; */
+      width: 100%;
+      margin-top:35%;
+  
+    }
+
+    footer p {
+      margin: 5px 0;
+      font-size: 18px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 200px;
+      }
+
+      .content {
+        margin-left: 220px;
+      }
+
+      .toggle-btn {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+
+      .sidebar ul li a {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        transform: none;
+      }
+
+      .sidebar.active {
+        transform: none;
+      }
+
+      .toggle-btn {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 10px;
+      }
+
+      header {
+        justify-content: space-between;
+      }
+
+      section {
+        margin: 20px 0;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .toggle-btn {
+        font-size: 14px;
+        padding: 6px 12px;
+      }
+
+      .sidebar ul li a {
+        font-size: 14px;
+      }
+    } 
+    @keyframes glow {
+        0% {
+            text-shadow: 0 0 15px rgb(232, 143, 143), 0 0 20px rgb(236, 81, 81);
+        }
+        50% {
+        text-shadow: 0 0 15px rgba(255, 0, 0, 1), 0 0 20px rgb(192, 10, 10);
+    }
+    100% {
+        text-shadow: 0 0 5px rgba(255, 0, 0, 0.7), 0 0 10px rgb(246, 241, 241);
+    }
+    
+}
+
+/* Dark/Light mode specific styles */
+.dark-mode {
+    background-image: url('/images/newBgDark.jpg');
+      color: rgb(243, 235, 235)
+    }
+
+    .dark-mode .header {
+      background-color: rgb(46, 58, 62);
+    }
+
+    .dark-mode .sidebar {
+      background-color: rgb(46, 58, 62);
+    }
+
+    .dark-mode .sidebar ul li a {
+      color: #fff;
+    }
+
+    .dark-mode #content{
+      background-image: url('/images/DarkBG.jpg');
+    }
+    .dark-mode .logo{
+      background-color: rgb(46, 58, 62);;
+    }
+    .dark-mode .service-card h2{
+      color: white;
+    }
+    .dark-mode .service-text{
+      color: white;
+    }
+    .dark-mode footer{
+      background-color: rgb(46, 58, 62);
+      color: white;
+    }
+    .dark-mode section #contact{
+      background-color: rgb(46, 58, 62);
+    }
+    .dark-mode .table tbody tr:hover {
+  background-color: #656363;
+  color: white;
+}
+
+    .dark-mode .toggle-btn, .dark-mode .mode-btn, .dark-mode .logout-btn {
+      background-color: #f3f4e4;
+      color: #f49090;
+      border-color: #444;
+    }
+    .dark-mode .about-card{
+      color: white;
+      background-color: rgb(46, 58, 62);
+      border: 2px solid white;
+    }  
+
+
+        /* Container styling */
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center-align content */
+        }
+
+        /* Vehicle card styling */
+        .vehicle-card {
+            background-color: #d7ae2a;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: calc(35% - 30px); /* Two cards per row */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Hover effect: scale and box shadow */
+        .vehicle-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Swiper container for images */
+        .swiper-container {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* Card header styling */
+        .vehicle-header h3 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .vehicle-header p {
+            font-size: 18px;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        /* Card body styling */
+        .vehicle-body p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .status-available {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-sold {
+            color: red;
+            font-weight: bold;
+        }
+
+        
+
+        
+
+        /* Responsive layout for smaller screens */
+        @media (max-width: 400px) {
+            .vehicle-card {
+                width: calc(100% - 40px); /* Full-width card on small screens */
+            }
+        }
+ /* Enquiry button styling with glowing effect */
+.btn-enquiry {
+    display: inline-block;
+    background-color: #48484a; /* Sky blue background color */
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgba(57, 163, 205, 0.8); /* Initial sky blue glow */
+}
+
+.btn-enquiry:hover {
+    background-color: #0e0e0f; /* Darker sky blue on hover */
+    box-shadow: 0 0 20px rgb(7, 74, 101), 0 0 40px rgba(6, 69, 94, 0.6); /* Stronger glow on hover */
+}
+
+/* Optional: Pulsating glow animation */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 10px rgba(214, 226, 53, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 20px rgb(191, 229, 39), 0 0 40px rgba(135, 206, 235, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(135, 206, 235, 0.8);
+    }
+}
+
+/* Apply the animation to the button */
+.btn-enquiry {
+    animation: glow 2s infinite alternate;
+}
+  /* this style for edit and delete button on the cards of bikes display
+   */
+   /* Button styles */
+.btn {
+  text-decoration: none;
+  padding: 8px 12px;
+  margin: 0 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Edit button */
+.btn-edit {
+  background-color: #ffc107;
+  color: black;
+}
+
+.btn-edit:hover {
+  background-color: #e0a800;
+  color: black;
+}
+
+/* Delete button */
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+  color: white;
+}
+
+/* Icon styling inside buttons */
+.btn i {
+  margin-right: 5px;
+}
+    
+
+.dark-mode button i {
+    color: #f0eeee;
+}
+
+button:hover i {
+    color: #91eeee; /* Change color on hover */
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    margin: 0 10px;
+}
+
+button i {
+    color: #161313;
+}
+
+button:hover i {
+    color: #f9fafa; /* Change color on hover */
+}
+
+
+  
+  </style>
+</head>
+<body id="content">
+  <div class="header">
+    <a href="/login">
+      <button class="admin-btn" id="admin-btn"><i class="fas fa-user-shield"></i></button>
+    </a>
+    <button class="mode-btn" id="mode-btn"><i class="fas fa-moon"></i></button>
+</div>
+        <header >
+        <img src='/images/bikelogoedit.jpg'  class="logo" alt="logo">
+        
+    </header>
+    
+    
+      <div class="container-toggle-button">
+          <nav class="sidebar" id="sidebar">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="#oldbikes">Bikes</a></li>
+              <li><a href="/contact">Contact Us</a></li>
+              <li><a href="/aboutus">About Us</a></li>
+            </ul>
+          </nav>
+          
+          <div class="container">
+              <% vehicle.forEach(vehicle => { %>
+                <div class="vehicle-card">
+                    <div class="vehicle-header">
+                        <h3><%= vehicle.companyName %></h3>
+                        <p><%= vehicle.modelName %> - <%= vehicle.year %></p>
+                    </div>
+                    <div class="vehicle-body">
+                        <p><strong>Condition:</strong> <%= vehicle.condition %></p>
+                        <p><strong>Price:</strong> ₹<%= vehicle.price %></p>
+                        <p class="<%= vehicle.status === 'available' ? 'status-available' : 'status-sold' %>">
+                            <%= vehicle.status %>
+                        </p>
+                    </div>
+                    <div class="vehicle-footer">
+                        <a href="/enquire/Now" class="btn-enquiry">Enquiry Now</a>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        
+<!-- Footer -->
+<footer>
+  <section id="contact">
+    <p>&copy; All rights Reserved by Laxmi Automobiles PVT. LMT.</p>
+    <p>Email: k.c.pal1976@gmail.com | Phone: 91+ 9811306157</p>
+  </section>
+</footer>
+
+<script>
+
+  
+    // Select all sidebar links
+const navLinks = document.querySelectorAll('.sidebar ul li a');
+  const modeBtn = document.getElementById('mode-btn');
+  const body = document.body;
+  
+ 
+const sidebar = document.getElementById('sidebar');
+
+
+// Function to adjust content margin based on sidebar visibility
+const adjustContentMargin = () => {
+ 
+      content.style.marginLeft = '270px'; // Adjust this value as needed
+  
+};
+
+navLinks.forEach(link => {
+link.addEventListener('click', function() {
+  // Remove 'active' from all links
+  navLinks.forEach(link => link.classList.remove('active'));
+  
+  // Add 'active' class to the clicked link
+  this.classList.add('active');
+});
+});
+
+const content = document.getElementById('content'); // Ensure this matches your actual content element's ID
+sidebar.classList.toggle('active');
+  adjustContentMargin(); // Adjust content margin when toggling
+  if (sidebar.classList.contains('active')) {
+      content.style.marginLeft = '200px'; // Adjust this value as needed
+  } 
+  // Toggle dark/light mode
+  modeBtn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+      modeBtn.innerHTML = '☀️ ';
+    } else {
+      modeBtn.innerHTML = '🌙 ';
+    }
+  });
+
+  
+// Get the mode button and the body element
+
+
+// Function to apply the dark mode based on localStorage
+const applyDarkMode = () => {
+  const darkMode = localStorage.getItem('darkMode');
+  if (darkMode === 'enabled') {
+      body.classList.add('dark-mode');
+      modeBtn.innerHTML = '☀️'; // Sun icon for light mode toggle
+  } else {
+      body.classList.remove('dark-mode');
+      modeBtn.innerHTML = '🌙'; // Moon icon for dark mode toggle
+  }
+};
+
+// Apply dark mode on page load
+applyDarkMode();
+
+// Toggle dark/light mode when the button is clicked
+modeBtn.addEventListener('click', () => {
+  const darkMode = localStorage.getItem('darkMode');
+  
+  if (darkMode !== 'enabled') {
+      // Enable dark mode
+      body.classList.add('dark-mode');
+      localStorage.setItem('darkMode', 'enabled');
+      modeBtn.innerHTML = '☀️';
+  } else {
+      // Disable dark mode
+      body.classList.remove('dark-mode');
+      localStorage.setItem('darkMode', 'disabled');
+      modeBtn.innerHTML = '🌙';
+  }
+});
+/// swipe button on the images
+var swiper = new Swiper('.swiper-container', {
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+</script>
+
+
+</body>
+</html>
+
+   
+    
+
+    

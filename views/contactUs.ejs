@@ -1,0 +1,57 @@
+<%- include('./base/header.ejs') %>
+<div class="content">
+    <section id="contact-section">
+        <h2 style="color:white;">Contact</h2>
+        <p>If you have any questions or need assistance, feel free to contact us through any of the methods below:</p>
+
+        <div class="contact-info">
+            <div class="contact-card">
+                <h3>Phone</h3>
+                <p><a href="tel:+911234567890">+91 9811306157</a></p>
+            </div>
+            <div class="contact-card">
+                <h3>Email</h3>
+                <p><a href="mailto:info@laxmiautomobiles.com">k.c.pal1976@gmail.com</a></p>
+            </div>
+            <div class="contact-card">
+                <h3>Address</h3>
+                <p>Shop No. :, Main Road Tahirpur, Near GTB Enclave Police Station Car Market ,City: East Delhi,Delhi:110095  State: Delhi </p>
+            </div>
+            <div class="contact-card">
+                <h3>Social Media</h3>
+                <p>
+                    <a href="https://www.facebook.com" target="_blank">Facebook</a> | 
+                    <a href="https://www.instagram.com" target="_blank">Instagram</a> | 
+                    <a href="https://www.twitter.com" target="_blank">Twitter</a>
+                </p>
+            </div>
+            <hr style=" margin-top: 10%; margin-bottom: 2%; width: 100%; height: 25%; text-decoration: dotted;">
+        </div>
+
+        <form id="contact-form" action="/add/message" method="post">
+            <h3>Send us a message or Feedback</h3>
+            <div>
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="customerName" required>
+            </div>
+            <div>
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="emailId" required>
+            </div>
+            <div>
+                <label for="Mobile Number">Your Mobile Number:</label>
+                <input type="number" id="mobile" name="mobileNo" required>
+            </div>
+            <div>
+                <label for="Whatsapp Number">Your Whatsapp Number:</label>
+                <input type="number" id="whatappNo" name="whatsappNo" required>
+            </div>
+            <div>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+</div>
+<%- include('./base/footer.ejs') %>
